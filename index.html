@@ -146,6 +146,23 @@ section{scroll-margin-top:24px}
 .evitems{display:grid;gap:13px}
 .evitem{display:flex;gap:16px;align-items:baseline;justify-content:space-between;padding:3px 8px;margin:-3px -8px;border-radius:8px;transition:background .2s ease-out}
 .evitem:hover{background:rgba(224,188,100,.07)}
+
+/* day tabs */
+.daytabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch}
+.dtab{flex:none;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--grey);font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:10px 13px 12px;cursor:pointer;transition:color .15s ease-out,border-color .15s ease-out}
+.dtab:hover{color:var(--ink)}
+.dtab[aria-selected="true"]{color:var(--blue);border-bottom-color:var(--blue)}
+.daypanel{padding-top:4px}
+.prow{display:grid;grid-template-columns:112px 1fr;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--hairline)}
+.prow:first-child{border-top:none}
+.ptime{font-size:.8rem;color:var(--blue);font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.pev .t{font-family:var(--serif);font-size:1.06rem;color:var(--ink);line-height:1.4;display:block}
+.pev .h{font-size:.82rem;color:#A9B0CC;margin-top:1px;display:block}
+.openslot{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:1px dashed rgba(224,188,100,.45);border-radius:8px;padding:12px 16px;color:var(--grey);cursor:pointer;font-family:var(--sans);font-size:.85rem;letter-spacing:.02em;transition:border-color .2s ease-out,color .2s ease-out,background .2s ease-out}
+.openslot:hover{border-color:var(--blue);color:var(--blue);background:rgba(224,188,100,.05)}
+@media (max-width:720px){
+  .prow{grid-template-columns:86px 1fr;gap:12px}
+}
 .ev-date{font-size:.8rem;font-weight:600;color:var(--blue);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .ev-title{font-family:var(--serif);font-size:1.08rem;color:var(--ink);line-height:1.4}
 .ev-host{display:block;font-size:.82rem;color:#A9B0CC;margin-top:1px}
@@ -280,40 +297,8 @@ section{scroll-margin-top:24px}
       refreshing conversation. If you have an activity or event you&rsquo;d like
       to bring to life, please <a href="#join">let us know</a>.</p>
 
-      <div class="r">
-        <div class="evgroup">
-          <span class="ev-date">Sun 20</span>
-          <div class="evitems">
-            <div class="evitem"><span class="ev-title">Opening Long Table Dinner<span class="ev-host">Dear Crisis</span></span><span class="ev-time">6 PM</span></div>
-          </div>
-        </div>
-        <div class="evgroup">
-          <span class="ev-date">Mon 21</span>
-          <div class="evitems">
-            <div class="evitem"><span class="ev-title">Live Podcast with Dr. Ayana Johnson<span class="ev-host">Michael Mezzatesta</span></span><span class="ev-time">4:30&ndash;5:30 PM</span></div>
-            <div class="evitem"><span class="ev-title">Open Mingle with Michael Mezzatesta<span class="ev-host">All welcome</span></span><span class="ev-time">5:30&ndash;7 PM</span></div>
-            <div class="evitem"><span class="ev-title">The Great Simplification<span class="ev-host">A talk by Nate Hagens</span></span><span class="ev-time">7&ndash;8 PM</span></div>
-          </div>
-        </div>
-        <div class="evgroup">
-          <span class="ev-date">Wed 23</span>
-          <div class="evitems">
-            <div class="evitem"><span class="ev-title">New Narratives for Activism<span class="ev-host">A cross-generational salon with Douglas Rushkoff</span></span><span class="ev-time">6:30&ndash;8:30 PM</span></div>
-          </div>
-        </div>
-        <div class="evgroup">
-          <span class="ev-date">Thu 24</span>
-          <div class="evitems">
-            <div class="evitem"><span class="ev-title">Future-Proofing Our Neighborhoods: Designing Islands of Coherence<span class="ev-host">A working dinner with Dear Crisis</span></span><span class="ev-time">6:30&ndash;8:30 PM</span></div>
-          </div>
-        </div>
-        <div class="evgroup">
-          <span class="ev-date">Sun 27</span>
-          <div class="evitems">
-            <div class="evitem"><span class="ev-title">Closing Circle: Family Dinner<span class="ev-host">Everyone</span></span><span class="ev-time">5 PM</span></div>
-          </div>
-        </div>
-      </div>
+      <div class="daytabs r" id="daytabs" role="tablist" aria-label="Pick a day"></div>
+      <div class="daypanel r" id="daypanel"></div>
 
       <p class="up-more r">The rest of the week is open, and the room is
       listening. <a href="#join">Submit an event</a>.</p>
@@ -540,6 +525,112 @@ section{scroll-margin-top:24px}
   } else {
     Array.prototype.forEach.call(els, function(n){ n.classList.add('in'); });
   }
+
+  /* ---------- Day tabs ---------- */
+  var WEEK = [
+    {d:'Sun', n:20, rows:[
+      {t:'2:30–4:30 PM', open:true},
+      {t:'6 PM', title:'Opening Long Table Dinner', host:'Dear Crisis'},
+      {t:'8:30–10:30 PM', open:true}
+    ]},
+    {d:'Mon', n:21, rows:[
+      {t:'4:30–5:30 PM', title:'Live Podcast with Dr. Ayana Johnson', host:'Michael Mezzatesta'},
+      {t:'5:30–7 PM', title:'Open Mingle with Michael Mezzatesta', host:'All welcome'},
+      {t:'7–8 PM', title:'The Great Simplification', host:'A talk by Nate Hagens'},
+      {t:'8:30–10:30 PM', open:true}
+    ]},
+    {d:'Tue', n:22, rows:[
+      {t:'4:30–6:30 PM', open:true},
+      {t:'6:30–8:30 PM', open:true},
+      {t:'8:30–10:30 PM', open:true}
+    ]},
+    {d:'Wed', n:23, rows:[
+      {t:'4:30–6:30 PM', open:true},
+      {t:'6:30–8:30 PM', title:'New Narratives for Activism', host:'A cross-generational salon with Douglas Rushkoff'},
+      {t:'8:30–10:30 PM', open:true}
+    ]},
+    {d:'Thu', n:24, rows:[
+      {t:'4:30–6:30 PM', open:true},
+      {t:'6:30–8:30 PM', title:'Future-Proofing Our Neighborhoods: Designing Islands of Coherence', host:'A working dinner with Dear Crisis'},
+      {t:'8:30–10:30 PM', open:true}
+    ]},
+    {d:'Fri', n:25, rows:[
+      {t:'4:30–6:30 PM', open:true},
+      {t:'6:30–8:30 PM', open:true},
+      {t:'8:30–10:30 PM', open:true}
+    ]},
+    {d:'Sat', n:26, rows:[
+      {t:'4:30–6:30 PM', open:true},
+      {t:'6:30–8:30 PM', open:true},
+      {t:'8:30–10:30 PM', open:true}
+    ]},
+    {d:'Sun', n:27, rows:[
+      {t:'5 PM', title:'Closing Circle: Family Dinner', host:'Everyone'},
+      {t:'7:30–9:30 PM', open:true}
+    ]}
+  ];
+  var activeDay = 0;
+
+  function el(tag, cls, html){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html !== undefined) n.innerHTML = html;
+    return n;
+  }
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function pickSlot(day, row){
+    var field = document.getElementById('h-days');
+    if (field) field.value = day.d + ', Sept ' + day.n + ' · ' + row.t;
+    var join = document.getElementById('join');
+    if (join) join.scrollIntoView({behavior:'smooth', block:'start'});
+    var what = document.getElementById('h-what');
+    if (what) setTimeout(function(){ what.focus({preventScroll:true}); }, 450);
+  }
+
+  function renderTabs(){
+    var tabs = document.getElementById('daytabs');
+    tabs.innerHTML = '';
+    WEEK.forEach(function(day, i){
+      var b = el('button','dtab', day.d.toUpperCase() + ' ' + day.n);
+      b.type = 'button';
+      b.setAttribute('role','tab');
+      b.setAttribute('aria-selected', i === activeDay ? 'true' : 'false');
+      b.addEventListener('click', function(){
+        activeDay = i;
+        renderTabs();
+        renderDay();
+      });
+      tabs.appendChild(b);
+    });
+  }
+
+  function renderDay(){
+    var panel = document.getElementById('daypanel');
+    panel.innerHTML = '';
+    var day = WEEK[activeDay];
+    day.rows.forEach(function(row){
+      var pr = el('div','prow');
+      pr.appendChild(el('span','ptime', esc(row.t)));
+      if (row.open){
+        var b = el('button','openslot','<span class="ast">✦</span>&nbsp; Open block · submit an event here');
+        b.type = 'button';
+        b.setAttribute('aria-label','Submit an event for ' + day.d + ' September ' + day.n + ', ' + row.t);
+        b.addEventListener('click', function(){ pickSlot(day, row); });
+        pr.appendChild(b);
+      } else {
+        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + '</span>'));
+      }
+      panel.appendChild(pr);
+    });
+  }
+
+  renderTabs();
+  renderDay();
 
   /* forms (prototype: stored locally, success states inline) */
   function wire(formId, formView, doneView, storeKey, getData){
