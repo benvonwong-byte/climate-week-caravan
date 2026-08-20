@@ -148,8 +148,9 @@ section{scroll-margin-top:24px}
 .evitem:hover{background:rgba(224,188,100,.07)}
 
 /* day tabs */
-.daytabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch}
-.dtab{flex:none;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--grey);font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:10px 13px 12px;cursor:pointer;transition:color .15s ease-out,border-color .15s ease-out}
+.daytabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.daytabs::-webkit-scrollbar{display:none;width:0;height:0}
+.dtab{flex:1 0 auto;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--grey);font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 9px 12px;cursor:pointer;white-space:nowrap;transition:color .15s ease-out,border-color .15s ease-out}
 .dtab:hover{color:var(--ink)}
 .dtab[aria-selected="true"]{color:var(--blue);border-bottom-color:var(--blue)}
 .daypanel{padding-top:4px}
