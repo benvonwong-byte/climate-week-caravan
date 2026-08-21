@@ -147,6 +147,23 @@ section{scroll-margin-top:24px}
 .evitem{display:flex;gap:16px;align-items:baseline;justify-content:space-between;padding:3px 8px;margin:-3px -8px;border-radius:8px;transition:background .2s ease-out}
 .evitem:hover{background:rgba(224,188,100,.07)}
 
+/* view toggle */
+.uphead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.uphead .lbl{margin-bottom:0}
+.vtoggle{display:flex;gap:4px}
+.vbtn{background:none;border:1px solid transparent;border-radius:999px;color:var(--grey);font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;cursor:pointer;transition:color .15s ease-out,border-color .15s ease-out}
+.vbtn:hover{color:var(--ink)}
+.vbtn[aria-pressed="true"]{color:var(--blue);border-color:rgba(224,188,100,.5)}
+
+/* list view */
+.ldate{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);padding:24px 0 4px}
+.ldate:first-child{padding-top:0}
+.lmore{margin-top:26px;padding-top:18px;border-top:1px solid var(--hairline);font-size:.92rem;color:var(--grey)}
+.lmore button{background:none;border:none;padding:0;font:inherit;color:var(--blue);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,188,100,.5)}
+.lmore button:hover{text-decoration-color:var(--blue)}
+.linkish{background:none;border:none;padding:0;font:inherit;color:var(--blue);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,188,100,.5)}
+.linkish:hover{text-decoration-color:var(--blue)}
+
 /* day tabs */
 .daytabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
 .daytabs::-webkit-scrollbar{display:none;width:0;height:0}
@@ -302,17 +319,27 @@ section{scroll-margin-top:24px}
   <!-- ================= UPCOMING ================= -->
   <section class="sec" id="upcoming">
     <div class="wrap">
-      <span class="lbl r">Upcoming</span>
+      <div class="uphead r">
+        <span class="lbl">Upcoming</span>
+        <div class="vtoggle" id="vtoggle">
+          <button class="vbtn" type="button" data-view="list" aria-pressed="true">List</button>
+          <button class="vbtn" type="button" data-view="day" aria-pressed="false">By day</button>
+        </div>
+      </div>
       <p class="up-intro r">A combination of private and public events we&rsquo;re
       hosting this week. Join us for a nourishing bite, quick break or
       refreshing conversation. If you have an activity or event you&rsquo;d like
       to bring to life, please <a href="#join">let us know</a>.</p>
 
-      <div class="daytabs r" id="daytabs" role="tablist" aria-label="Pick a day"></div>
-      <div class="daypanel r" id="daypanel"></div>
+      <div class="listview r" id="listview"></div>
+      <div class="dayview r" id="dayview" hidden>
+        <div class="daytabs" id="daytabs" role="tablist" aria-label="Pick a day"></div>
+        <div class="daypanel" id="daypanel"></div>
+      </div>
 
       <p class="up-more r">The rest of the week is open, and the room is
-      listening. <a href="#join">Submit an event</a>.</p>
+      listening. <a href="#join">Submit an event</a>, or
+      <button type="button" class="linkish" id="see-openings">see the open blocks</button>.</p>
     </div>
   </section>
 
@@ -640,8 +667,61 @@ section{scroll-margin-top:24px}
     });
   }
 
+  function openCount(){
+    var n = 0;
+    WEEK.forEach(function(day){
+      day.rows.forEach(function(row){ if (row.open) n++; });
+    });
+    return n;
+  }
+
+  function renderList(){
+    var wrap = document.getElementById('listview');
+    wrap.innerHTML = '';
+    WEEK.forEach(function(day){
+      var events = day.rows.filter(function(r){ return !r.open; });
+      if (!events.length) return;
+      wrap.appendChild(el('div','ldate', day.d + ' &middot; September ' + day.n));
+      events.forEach(function(row){
+        var pr = el('div','prow');
+        pr.appendChild(el('span','ptime', esc(row.t)));
+        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + '</span>'));
+        wrap.appendChild(pr);
+      });
+    });
+    var more = el('div','lmore','Plus ' + openCount() +
+      ' open blocks across the week. <button type="button" id="tolist-day">Pick a day to claim one</button>.');
+    wrap.appendChild(more);
+    document.getElementById('tolist-day').addEventListener('click', function(){ setView('day'); });
+  }
+
+  function setView(view){
+    var isList = (view === 'list');
+    document.getElementById('listview').hidden = !isList;
+    document.getElementById('dayview').hidden = isList;
+    Array.prototype.forEach.call(document.querySelectorAll('.vbtn'), function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-view') === view ? 'true' : 'false');
+    });
+    if (!isList){
+      renderTabs();
+      renderDay();
+    }
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.vbtn'), function(b){
+    b.addEventListener('click', function(){ setView(b.getAttribute('data-view')); });
+  });
+
+  renderList();
   renderTabs();
   renderDay();
+  setView('list');
+
+  var seeOpen = document.getElementById('see-openings');
+  if (seeOpen) seeOpen.addEventListener('click', function(){
+    setView('day');
+    document.getElementById('daytabs').scrollIntoView({behavior:'smooth', block:'center'});
+  });
 
   /* forms (prototype: stored locally, success states inline) */
   function wire(formId, formView, doneView, storeKey, getData){
