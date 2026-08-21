@@ -164,6 +164,16 @@ section{scroll-margin-top:24px}
 @media (max-width:720px){
   .prow{grid-template-columns:86px 1fr;gap:12px}
 }
+/* narrow screens: tabs wrap into a 4x2 grid, so the row can never overflow
+   and no engine on any OS has a scrollbar to draw */
+@media (max-width:640px){
+  .daytabs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;overflow:visible}
+  .dtab{padding:11px 2px 12px;text-align:center;letter-spacing:.1em}
+}
+@media (max-width:600px){
+  .prow{grid-template-columns:1fr;gap:5px;padding:13px 0}
+  .ptime{font-size:.74rem}
+}
 .ev-date{font-size:.8rem;font-weight:600;color:var(--blue);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .ev-title{font-family:var(--serif);font-size:1.08rem;color:var(--ink);line-height:1.4}
 .ev-host{display:block;font-size:.82rem;color:#A9B0CC;margin-top:1px}
