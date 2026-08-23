@@ -190,6 +190,12 @@ section{scroll-margin-top:24px}
 .linkish:hover{text-decoration-color:var(--blue)}
 
 
+/* fixed room notice in the form */
+.roomfix{display:flex;flex-direction:column;gap:7px;padding:12px 14px;border:1px dashed rgba(224,188,100,.35);border-radius:10px}
+.roomfix .rmchip{margin-left:0}
+.roomfix-note{font-size:.85rem;color:var(--grey);line-height:1.5}
+.fine strong{color:var(--blue);font-weight:600}
+
 /* room color blocks */
 .rmchip{display:inline-flex;align-items:center;gap:6px;margin-left:10px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
 .rmchip i{width:9px;height:9px;border-radius:2px;flex:none}
@@ -385,8 +391,11 @@ section{scroll-margin-top:24px}
       <p class="up-more r">The rest of the week is open, and the room is
       listening. <a href="#join">Submit an event</a>, or
       <button type="button" class="linkish" id="see-openings">see the open blocks</button>.</p>
-      <p class="fine r" style="margin-top:10px">Blocks sit half an hour apart so
-      we can turn the room around between gatherings.</p>
+      <p class="fine r" style="margin-top:10px">Open blocks are the
+      <strong>back room</strong>, which seats 30 to 35 behind a door that closes.
+      The front room stays open to everyone all week as the refuge, so it is not
+      bookable right now. Blocks sit half an hour apart so we can turn the room
+      around between gatherings.</p>
     </div>
   </section>
 
@@ -559,6 +568,12 @@ section{scroll-margin-top:24px}
                 <textarea class="f-textarea" id="h-what" rows="2" required placeholder="The shape of it, in a sentence or two."></textarea>
               </div>
               <div class="f-field">
+                <span class="f-label">Room</span>
+                <p class="roomfix"><span class="rmchip rm-back"><i></i>Back room</span>
+                <span class="roomfix-note">Seats 30 to 35, private, with a screen.
+                It is the only room we are booking right now.</span></p>
+              </div>
+              <div class="f-field">
                 <label class="f-label" for="h-days">Preferred days</label>
                 <input class="f-input" id="h-days" type="text" placeholder="Any weekday evening, the takeover weekend&hellip;">
               </div>
@@ -703,7 +718,7 @@ section{scroll-margin-top:24px}
         var b = el('button','openslot',
           '<span class="ast">✦</span>' +
           '<span class="oslot"><span class="ot">Open block · submit an event here</span>' +
-          '<span class="orooms">' + roomChip('back') + roomChip('front') + '</span></span>');
+          '<span class="orooms">' + roomChip('back') + '</span></span>');
         b.type = 'button';
         b.setAttribute('aria-label','Submit an event for ' + day.d + ' September ' + day.n + ', ' + row.t);
         b.addEventListener('click', function(){ pickSlot(day, row); });
