@@ -60,9 +60,34 @@ body{
 .maplink{display:block;margin-top:30px;opacity:.94;transition:opacity .2s ease-out}
 .maplink:hover{opacity:1}
 .map{width:100%;height:auto;display:block}
-.map text{font-family:var(--sans)}
-.mapcap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:.78rem;color:var(--grey)}
-.mapcap .nav{color:var(--blue);font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,188,100,.5)}
+.map text{font-family:var(--sans);paint-order:stroke fill;stroke:#0C1A3C;stroke-width:5px;stroke-linejoin:round}
+.m-st{font-size:15px;font-weight:600;letter-spacing:1.5px;fill:#98A2C4}
+.m-park{font-size:15px;font-weight:600;letter-spacing:1.5px;fill:#B8C4E8}
+.m-ring{font-size:15px;font-weight:600;letter-spacing:2px;fill:#98A2C4}
+.m-stn{font-size:17px;font-weight:700;letter-spacing:1.5px;fill:#E0BC64}
+.m-walk{font-size:14px;font-weight:600;letter-spacing:1px;fill:#98A2C4}
+.m-busl{font-size:13px;font-weight:600;letter-spacing:1px;fill:#98A2C4}
+.m-bullet{font-size:15px;font-weight:700;fill:#0B1733;stroke:none}
+.m-star{font-size:28px;fill:#E0BC64;stroke:none}
+.m-place{font-size:20px;font-weight:700;letter-spacing:2.5px;fill:#E0BC64}
+.m-addr{font-size:15px;font-weight:600;letter-spacing:1.5px;fill:#98A2C4}
+@media (max-width:720px){
+  /* the map shrinks with the viewport, so drop secondary labels and
+     scale the rest up in user units to stay legible on a phone */
+  .m-bus,.m-ave,.m-compass,.m-union,.m-st2{display:none}
+  .m-st{font-size:23px}
+  .m-park{font-size:22px}
+  .m-ring{font-size:21px;letter-spacing:1px}
+  .m-stn{font-size:26px}
+  .m-walk{font-size:21px}
+  .m-place{font-size:29px;letter-spacing:1.5px}
+  .m-addr{font-size:22px}
+  .m-bullet{font-size:22px}
+  .map text{stroke-width:7px}
+  .maplink{margin-left:-24px;margin-right:-24px;width:calc(100% + 48px)}
+}
+.mapcap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:.85rem;color:var(--grey)}
+.mapcap .nav{color:var(--blue);font-weight:600;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,188,100,.5)}
 .mapcap .nav:hover{text-decoration-color:var(--blue)}
 .mapcap .fp{color:var(--grey)}
 .mapcap .fp b{font-weight:600;color:var(--teal)}
@@ -70,7 +95,7 @@ body{
 /* epigraph */
 .epigraph{padding:66px 24px 58px;text-align:center}
 .epigraph .q{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,3vw,1.7rem);color:var(--ink);max-width:22em;margin:0 auto;line-height:1.5;text-wrap:balance}
-.epigraph .attr{margin-top:16px;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue)}
+.epigraph .attr{margin-top:16px;font-size:.76rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue)}
 
 /* gold star divider */
 .orn{display:flex;align-items:center;gap:14px;max-width:320px;margin:0 auto;color:var(--blue)}
@@ -88,7 +113,7 @@ section{scroll-margin-top:24px}
 .wide{max-width:880px;margin:0 auto;padding:0 24px}
 
 .lbl{
-  font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  font-size:.85rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
   color:var(--blue);
 }
 .ast{color:var(--blue)}
@@ -101,7 +126,7 @@ section{scroll-margin-top:24px}
 /* ---------- top line ---------- */
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:22px 0 0}
 .top .name{font-family:var(--serif);font-size:1rem;color:var(--ink);text-decoration:none}
-.top a.quiet{font-size:.78rem;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid var(--blue);border-radius:999px;padding:7px 16px;transition:background .2s ease-out,color .2s ease-out}
+.top a.quiet{font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid var(--blue);border-radius:999px;padding:7px 16px;transition:background .2s ease-out,color .2s ease-out}
 .top a.quiet:hover{background:var(--blue);color:var(--paper)}
 
 /* ---------- hero ---------- */
@@ -151,12 +176,12 @@ section{scroll-margin-top:24px}
 .uphead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
 .uphead .lbl{margin-bottom:0}
 .vtoggle{display:flex;gap:4px}
-.vbtn{background:none;border:1px solid transparent;border-radius:999px;color:var(--grey);font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;cursor:pointer;transition:color .15s ease-out,border-color .15s ease-out}
+.vbtn{background:none;border:1px solid transparent;border-radius:999px;color:var(--grey);font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;cursor:pointer;transition:color .15s ease-out,border-color .15s ease-out}
 .vbtn:hover{color:var(--ink)}
 .vbtn[aria-pressed="true"]{color:var(--blue);border-color:rgba(224,188,100,.5)}
 
 /* list view */
-.ldate{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);padding:24px 0 4px}
+.ldate{font-size:.86rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);padding:24px 0 4px}
 .ldate:first-child{padding-top:0}
 .lmore{margin-top:26px;padding-top:18px;border-top:1px solid var(--hairline);font-size:.92rem;color:var(--grey)}
 .lmore button{background:none;border:none;padding:0;font:inherit;color:var(--blue);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,188,100,.5)}
@@ -164,18 +189,36 @@ section{scroll-margin-top:24px}
 .linkish{background:none;border:none;padding:0;font:inherit;color:var(--blue);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,188,100,.5)}
 .linkish:hover{text-decoration-color:var(--blue)}
 
+
+/* room color blocks */
+.rmchip{display:inline-flex;align-items:center;gap:6px;margin-left:10px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.rmchip i{width:9px;height:9px;border-radius:2px;flex:none}
+.rm-back{color:#E0BC64}
+.rm-back i{background:#E0BC64}
+.rm-front{color:#8FD0E8}
+.rm-front i{background:#8FD0E8}
+.oslot{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.orooms{display:flex;gap:2px}
+.orooms .rmchip{margin-left:0;margin-right:12px;opacity:.85}
+.openslot{align-items:flex-start}
+.openslot .ast{padding-top:2px}
+
+/* tinted panels so the schedule and the forms read as blocks on the sky */
+.block{background:rgba(184,196,232,.045);border:1px solid rgba(224,188,100,.18);border-radius:14px;padding:26px 26px 30px}
+@media (max-width:600px){.block{padding:18px 16px 22px;border-radius:12px}}
+
 /* day tabs */
 .daytabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
 .daytabs::-webkit-scrollbar{display:none;width:0;height:0}
-.dtab{flex:1 0 auto;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--grey);font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 9px 12px;cursor:pointer;white-space:nowrap;transition:color .15s ease-out,border-color .15s ease-out}
+.dtab{flex:1 0 auto;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--grey);font-family:var(--sans);font-size:.86rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 9px 12px;cursor:pointer;white-space:nowrap;transition:color .15s ease-out,border-color .15s ease-out}
 .dtab:hover{color:var(--ink)}
 .dtab[aria-selected="true"]{color:var(--blue);border-bottom-color:var(--blue)}
 .daypanel{padding-top:4px}
 .prow{display:grid;grid-template-columns:112px 1fr;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--hairline)}
 .prow:first-child{border-top:none}
-.ptime{font-size:.8rem;color:var(--blue);font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.ptime{font-size:.86rem;color:var(--blue);font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .pev .t{font-family:var(--serif);font-size:1.06rem;color:var(--ink);line-height:1.4;display:block}
-.pev .h{font-size:.82rem;color:#A9B0CC;margin-top:1px;display:block}
+.pev .h{font-size:.88rem;color:#A9B0CC;margin-top:1px;display:block}
 .openslot{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:1px dashed rgba(224,188,100,.45);border-radius:8px;padding:12px 16px;color:var(--grey);cursor:pointer;font-family:var(--sans);font-size:.85rem;letter-spacing:.02em;transition:border-color .2s ease-out,color .2s ease-out,background .2s ease-out}
 .openslot:hover{border-color:var(--blue);color:var(--blue);background:rgba(224,188,100,.05)}
 @media (max-width:720px){
@@ -189,15 +232,15 @@ section{scroll-margin-top:24px}
 }
 @media (max-width:600px){
   .prow{grid-template-columns:1fr;gap:5px;padding:13px 0}
-  .ptime{font-size:.74rem}
+  .ptime{font-size:.86rem}
 }
-.ev-date{font-size:.8rem;font-weight:600;color:var(--blue);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.ev-date{font-size:.86rem;font-weight:600;color:var(--blue);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .ev-title{font-family:var(--serif);font-size:1.08rem;color:var(--ink);line-height:1.4}
-.ev-host{display:block;font-size:.82rem;color:#A9B0CC;margin-top:1px}
-.ev-time{font-size:.8rem;color:var(--grey);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ev-host{display:block;font-size:.88rem;color:#A9B0CC;margin-top:1px}
+.ev-time{font-size:.86rem;color:var(--grey);font-variant-numeric:tabular-nums;white-space:nowrap}
 .takeover-note{
   padding:15px 0;border-top:1px solid var(--hairline);
-  font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
+  font-size:.86rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
 }
 .up-more{margin-top:34px;font-size:.98rem}
 
@@ -211,7 +254,7 @@ section{scroll-margin-top:24px}
 
 /* ---------- refuge ---------- */
 .refuge img{width:100%;height:auto;margin-bottom:26px}
-.refuge .cap{font-size:.75rem;color:var(--grey);text-align:right;margin:-18px 0 26px}
+.refuge .cap{font-size:.88rem;color:var(--grey);text-align:right;margin:-18px 0 26px}
 .refuge p.txt{max-width:36em}
 .shots{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
 .shots img{width:100%;height:300px;object-fit:cover;margin:0}
@@ -225,7 +268,7 @@ section{scroll-margin-top:24px}
 .join h2{font-family:var(--serif);font-weight:500;font-size:1.45rem;margin-bottom:10px}
 .join p.d{font-size:.95rem;margin-bottom:22px;max-width:26em}
 .f-field{margin-bottom:14px}
-.f-label{display:block;font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
+.f-label{display:block;font-size:.76rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
 .f-input,.f-textarea{
   width:100%;padding:12px 2px;border:none;border-bottom:1px solid var(--ink);
   background:transparent;color:var(--ink);font-family:var(--sans);font-size:.98rem;border-radius:0;
@@ -248,7 +291,7 @@ section{scroll-margin-top:24px}
 .footer p{font-size:.85rem;color:var(--grey)}
 .footer a{color:var(--blue);text-decoration:none}
 .footer a:hover{text-decoration:underline;text-underline-offset:4px}
-.smallprint{margin-top:34px;font-size:.72rem;color:#6B759B;line-height:1.8;max-width:44em;margin-left:auto;margin-right:auto}
+.smallprint{margin-top:34px;font-size:.86rem;color:#6B759B;line-height:1.8;max-width:44em;margin-left:auto;margin-right:auto}
 
 @media (max-width:720px){
   .hero{padding:64px 0 76px}
@@ -256,7 +299,7 @@ section{scroll-margin-top:24px}
   .join-grid{grid-template-columns:1fr;gap:48px}
   .evgroup{grid-template-columns:64px 1fr;gap:12px}
   .evitem{flex-wrap:wrap}
-  .keywords .lbl{letter-spacing:.14em;font-size:.62rem}
+  .keywords .lbl{letter-spacing:.14em;font-size:.86rem}
 }
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230B1733'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='%23E0BC64'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
@@ -331,10 +374,12 @@ section{scroll-margin-top:24px}
       refreshing conversation. If you have an activity or event you&rsquo;d like
       to bring to life, please <a href="#join">let us know</a>.</p>
 
-      <div class="listview r" id="listview"></div>
-      <div class="dayview r" id="dayview" hidden>
+      <div class="block r">
+      <div class="listview" id="listview"></div>
+      <div class="dayview" id="dayview" hidden>
         <div class="daytabs" id="daytabs" role="tablist" aria-label="Pick a day"></div>
         <div class="daypanel" id="daypanel"></div>
+      </div>
       </div>
 
       <p class="up-more r">The rest of the week is open, and the room is
@@ -385,82 +430,80 @@ section{scroll-margin-top:24px}
     </div>
       <div class="wrap">
       <a class="maplink r" href="https://www.google.com/maps/search/?api=1&amp;query=Caravan%20of%20Dreams%20405%20E%206th%20St%20New%20York" target="_blank" rel="noopener noreferrer" aria-label="Open Caravan of Dreams, 405 East 6th Street, in Google Maps">
-        <svg class="map" viewBox="0 0 680 460" role="img" aria-hidden="true">
-          <rect x="1" y="1" width="678" height="458" fill="#0C1A3C" stroke="#C7AE6B" stroke-opacity=".45"/>
-          <g stroke="#C7AE6B" stroke-opacity=".35" stroke-width="1">
-            <line x1="90" y1="20" x2="90" y2="440"/>
-            <line x1="180" y1="20" x2="180" y2="440"/>
-            <line x1="320" y1="20" x2="320" y2="440"/>
-            <line x1="470" y1="20" x2="470" y2="440"/>
-            <line x1="610" y1="20" x2="610" y2="440"/>
-            <line x1="16" y1="45" x2="664" y2="45"/>
-            <line x1="16" y1="130" x2="664" y2="130"/>
-            <line x1="16" y1="225" x2="664" y2="225"/>
-            <line x1="16" y1="275" x2="664" y2="275"/>
-            <line x1="16" y1="420" x2="664" y2="420"/>
-          </g>
-          <g fill="#8B93B4" font-size="9" letter-spacing="1.5">
-            <text x="102" y="392" transform="rotate(-90 102 392)">3RD AVE</text>
-            <text x="192" y="392" transform="rotate(-90 192 392)">2ND AVE</text>
-            <text x="332" y="392" transform="rotate(-90 332 392)">1ST AVE</text>
-            <text x="482" y="392" transform="rotate(-90 482 392)">AVE A</text>
-            <text x="622" y="392" transform="rotate(-90 622 392)">AVE B</text>
-            <text x="126" y="39">E 14TH ST</text>
-            <text x="22" y="124">E 10TH ST</text>
-            <text x="22" y="219">E 7TH ST</text>
-            <text x="22" y="269">E 6TH ST</text>
-            <text x="22" y="414">E HOUSTON ST</text>
-          </g>
-          <rect x="476" y="136" width="128" height="83" fill="rgba(224,188,100,.06)" stroke="#C7AE6B" stroke-opacity=".55" stroke-dasharray="3 4"/>
-          <text x="540" y="172" fill="#B8C4E8" font-size="9.5" letter-spacing="1.5" text-anchor="middle">TOMPKINS</text>
-          <text x="540" y="186" fill="#B8C4E8" font-size="9.5" letter-spacing="1.5" text-anchor="middle">SQUARE PARK</text>
-
-          <circle cx="395" cy="275" r="150" fill="none" stroke="#E0BC64" stroke-opacity=".45" stroke-dasharray="2 7"/>
-          <text x="395" y="116" fill="#8B93B4" font-size="8.5" letter-spacing="2" text-anchor="middle">ABOUT 10 MINUTES ON FOOT</text>
-
-          <g>
-            <circle cx="320" cy="45" r="9.5" fill="#E0BC64"/>
-            <text x="320" y="49" fill="#0B1733" font-size="11" font-weight="700" text-anchor="middle">L</text>
-            <text x="336" y="42" fill="#E0BC64" font-size="9.5" font-weight="600" letter-spacing="1.5">1 AV</text>
-            <text x="336" y="54" fill="#8B93B4" font-size="8">8 MIN WALK</text>
-          </g>
-          <g>
-            <circle cx="55" cy="190" r="9.5" fill="#E0BC64"/>
-            <text x="55" y="194" fill="#0B1733" font-size="11" font-weight="700" text-anchor="middle">6</text>
-            <text x="71" y="187" fill="#E0BC64" font-size="9.5" font-weight="600" letter-spacing="1.5">ASTOR PL</text>
-            <text x="71" y="199" fill="#8B93B4" font-size="8">10 MIN WALK</text>
-          </g>
-          <g>
-            <circle cx="180" cy="420" r="9.5" fill="#E0BC64"/>
-            <text x="180" y="424" fill="#0B1733" font-size="11" font-weight="700" text-anchor="middle">F</text>
-            <text x="196" y="417" fill="#E0BC64" font-size="9.5" font-weight="600" letter-spacing="1.5">2 AV</text>
-            <text x="196" y="429" fill="#8B93B4" font-size="8">8 MIN WALK</text>
-          </g>
-          <g>
-            <circle cx="40" cy="45" r="8" fill="#E0BC64"/>
-            <text x="40" y="49" fill="#0B1733" font-size="9.5" font-weight="700" text-anchor="middle">4</text>
-            <circle cx="58" cy="45" r="8" fill="#E0BC64"/>
-            <text x="58" y="49" fill="#0B1733" font-size="9.5" font-weight="700" text-anchor="middle">N</text>
-            <text x="32" y="67" fill="#E0BC64" font-size="9" font-weight="600" letter-spacing="1.2">UNION SQ</text>
-            <text x="32" y="79" fill="#8B93B4" font-size="8">15 MIN WALK</text>
-          </g>
-          <g>
-            <circle cx="320" cy="365" r="4" fill="none" stroke="#E0BC64" stroke-opacity=".8"/>
-            <text x="330" y="369" fill="#8B93B4" font-size="8" letter-spacing="1">M15 BUS</text>
-          </g>
-          <g>
-            <circle cx="470" cy="240" r="4" fill="none" stroke="#E0BC64" stroke-opacity=".8"/>
-            <text x="480" y="244" fill="#8B93B4" font-size="8" letter-spacing="1">M14A BUS</text>
+        <svg class="map" viewBox="0 0 680 480" role="img" aria-hidden="true">
+          <rect x="1" y="1" width="678" height="478" fill="#0C1A3C" stroke="#C7AE6B" stroke-opacity=".45"/>
+          <g stroke="#C7AE6B" stroke-opacity=".32" stroke-width="1.2">
+            <line x1="80" y1="18" x2="80" y2="440"/>
+            <line x1="175" y1="18" x2="175" y2="440"/>
+            <line x1="320" y1="18" x2="320" y2="440"/>
+            <line x1="470" y1="18" x2="470" y2="440"/>
+            <line x1="610" y1="18" x2="610" y2="440"/>
+            <line x1="16" y1="50" x2="664" y2="50"/>
+            <line x1="16" y1="135" x2="664" y2="135"/>
+            <line x1="16" y1="230" x2="664" y2="230"/>
+            <line x1="16" y1="280" x2="664" y2="280"/>
+            <line x1="16" y1="415" x2="664" y2="415"/>
           </g>
 
-          <circle cx="395" cy="275" r="16" fill="none" stroke="#E0BC64" stroke-opacity=".55"/>
-          <text x="395" y="284" fill="#E0BC64" font-size="26" text-anchor="middle">&#10022;</text>
-          <text x="395" y="313" fill="#E0BC64" font-size="11.5" font-weight="600" letter-spacing="2" text-anchor="middle">CARAVAN OF DREAMS</text>
-          <text x="395" y="328" fill="#8B93B4" font-size="9" letter-spacing="1.5" text-anchor="middle">405 E 6TH ST</text>
+          <rect x="476" y="140" width="128" height="85" fill="rgba(224,188,100,.07)" stroke="#C7AE6B" stroke-opacity=".5" stroke-dasharray="4 5"/>
+          <text class="m-park" x="540" y="174" text-anchor="middle">TOMPKINS</text>
+          <text class="m-park" x="540" y="200" text-anchor="middle">SQUARE PARK</text>
 
-          <circle cx="634" cy="90" r="13" fill="none" stroke="#C7AE6B" stroke-opacity=".6"/>
-          <line x1="634" y1="83" x2="634" y2="90" stroke="#E0BC64"/>
-          <text x="634" y="75" fill="#8B93B4" font-size="8" text-anchor="middle">N</text>
+          <circle cx="395" cy="280" r="150" fill="none" stroke="#E0BC64" stroke-opacity=".5" stroke-dasharray="2 8"/>
+          <text class="m-ring" x="395" y="118" text-anchor="middle">ABOUT 10 MINUTES ON FOOT</text>
+
+          <g class="m-st-group">
+            <text class="m-st" x="130" y="44">E 14TH ST</text>
+            <text class="m-st m-st2" x="20" y="129">E 10TH ST</text>
+            <text class="m-st m-st2" x="20" y="224">E 7TH ST</text>
+            <text class="m-st" x="20" y="274">E 6TH ST</text>
+            <text class="m-st" x="490" y="409">E HOUSTON ST</text>
+          </g>
+          <g class="m-ave">
+            <text class="m-st" x="80" y="462" text-anchor="middle">3RD AVE</text>
+            <text class="m-st" x="175" y="462" text-anchor="middle">2ND AVE</text>
+            <text class="m-st" x="320" y="462" text-anchor="middle">1ST AVE</text>
+            <text class="m-st" x="470" y="462" text-anchor="middle">AVE A</text>
+            <text class="m-st" x="610" y="462" text-anchor="middle">AVE B</text>
+          </g>
+
+          <g class="m-bus">
+            <circle cx="320" cy="392" r="6" fill="none" stroke="#E0BC64" stroke-opacity=".85" stroke-width="1.4"/>
+            <text class="m-busl" x="336" y="397">M15 BUS</text>
+            <circle cx="470" cy="252" r="6" fill="none" stroke="#E0BC64" stroke-opacity=".85" stroke-width="1.4"/>
+            <text class="m-busl" x="486" y="257">M14A BUS</text>
+          </g>
+
+          <circle cx="320" cy="50" r="14" fill="#E0BC64"/>
+          <text class="m-bullet" x="320" y="57" text-anchor="middle">L</text>
+          <text class="m-stn" x="344" y="56">1 AV <tspan class="m-walk">· 8 MIN WALK</tspan></text>
+
+          <circle cx="50" cy="188" r="14" fill="#E0BC64"/>
+          <text class="m-bullet" x="50" y="195" text-anchor="middle">6</text>
+          <text class="m-stn" x="74" y="194">ASTOR PL <tspan class="m-walk">· 10 MIN</tspan></text>
+
+          <circle cx="175" cy="415" r="14" fill="#E0BC64"/>
+          <text class="m-bullet" x="175" y="422" text-anchor="middle">F</text>
+          <text class="m-stn" x="199" y="421">2 AV <tspan class="m-walk">· 8 MIN WALK</tspan></text>
+
+          <g class="m-union">
+            <circle cx="34" cy="50" r="12" fill="#E0BC64"/>
+            <text class="m-bullet" x="34" y="56" text-anchor="middle">4</text>
+            <circle cx="61" cy="50" r="12" fill="#E0BC64"/>
+            <text class="m-bullet" x="61" y="56" text-anchor="middle">N</text>
+            <text class="m-stn" x="20" y="92">UNION SQ <tspan class="m-walk">· 15 MIN</tspan></text>
+          </g>
+
+          <circle cx="395" cy="280" r="17" fill="none" stroke="#E0BC64" stroke-opacity=".6"/>
+          <text class="m-star" x="395" y="290" text-anchor="middle">&#10022;</text>
+          <text class="m-place" x="395" y="332" text-anchor="middle">CARAVAN OF DREAMS</text>
+          <text class="m-addr" x="395" y="362" text-anchor="middle">405 E 6TH ST</text>
+
+          <g class="m-compass">
+            <circle cx="634" cy="95" r="15" fill="none" stroke="#C7AE6B" stroke-opacity=".6"/>
+            <line x1="634" y1="87" x2="634" y2="95" stroke="#E0BC64" stroke-width="1.4"/>
+            <text class="m-walk" x="634" y="80" text-anchor="middle">N</text>
+          </g>
         </svg>
       </a>
       <p class="mapcap r"><a class="nav" href="https://www.google.com/maps/search/?api=1&amp;query=Caravan%20of%20Dreams%20405%20E%206th%20St%20New%20York" target="_blank" rel="noopener noreferrer">Navigate here &#8599;</a><span class="fp">Floor plan: <b>coming soon</b>.</span></p>
@@ -474,7 +517,7 @@ section{scroll-margin-top:24px}
   <!-- ================= JOIN ================= -->
   <section class="sec join" id="join">
     <div class="wide">
-      <div class="join-grid">
+      <div class="join-grid block">
 
         <div>
           <h2 class="r">Get notified</h2>
@@ -570,13 +613,13 @@ section{scroll-margin-top:24px}
   var WEEK = [
     {d:'Sun', n:20, rows:[
       {t:'2–4 PM', open:true},
-      {t:'6 PM', title:'Opening Long Table Dinner', host:'Dear Crisis'},
+      {t:'6 PM', title:'Opening Long Table Dinner', host:'Dear Crisis', room:'back'},
       {t:'9–11 PM', open:true}
     ]},
     {d:'Mon', n:21, rows:[
-      {t:'4:30–5:30 PM', title:'Live Podcast with Dr. Ayana Johnson', host:'Michael Mezzatesta'},
-      {t:'5:30–7 PM', title:'Open Mingle with Michael Mezzatesta', host:'All welcome'},
-      {t:'7–8 PM', title:'The Great Simplification', host:'A talk by Nate Hagens'},
+      {t:'4:30–5:30 PM', title:'Live Podcast with Dr. Ayana Johnson', host:'Michael Mezzatesta', room:'back'},
+      {t:'5:30–7 PM', title:'Open Mingle with Michael Mezzatesta', host:'All welcome', room:'front'},
+      {t:'7–8 PM', title:'The Great Simplification', host:'A talk by Nate Hagens', room:'back'},
       {t:'9–11 PM', open:true}
     ]},
     {d:'Tue', n:22, rows:[
@@ -585,13 +628,13 @@ section{scroll-margin-top:24px}
       {t:'9–11 PM', open:true}
     ]},
     {d:'Wed', n:23, rows:[
-      {t:'4–6 PM', title:'Next Economy MBA Alumni + Friends Mixer', host:'LIFT Economy'},
-      {t:'6:30–8:30 PM', title:'New Narratives for Activism', host:'A cross-generational salon with Douglas Rushkoff'},
+      {t:'4–6 PM', title:'Next Economy MBA Alumni + Friends Mixer', host:'LIFT Economy', room:'back'},
+      {t:'6:30–8:30 PM', title:'New Narratives for Activism', host:'A cross-generational salon with Douglas Rushkoff', room:'back'},
       {t:'9–11 PM', open:true}
     ]},
     {d:'Thu', n:24, rows:[
       {t:'4–6 PM', open:true},
-      {t:'6:30–8:30 PM', title:'Future-Proofing Our Neighborhoods: Designing Islands of Coherence', host:'A working dinner with Dear Crisis'},
+      {t:'6:30–8:30 PM', title:'Future-Proofing Our Neighborhoods: Designing Islands of Coherence', host:'A working dinner with Dear Crisis', room:'back'},
       {t:'9–11 PM', open:true}
     ]},
     {d:'Fri', n:25, rows:[
@@ -605,7 +648,7 @@ section{scroll-margin-top:24px}
       {t:'9–11 PM', open:true}
     ]},
     {d:'Sun', n:27, rows:[
-      {t:'5 PM', title:'Closing Circle: Family Dinner', host:'Everyone'},
+      {t:'5 PM', title:'Closing Circle: Family Dinner', host:'Everyone', room:'back'},
       {t:'9–11 PM', open:true}
     ]}
   ];
@@ -657,16 +700,25 @@ section{scroll-margin-top:24px}
       var pr = el('div','prow');
       pr.appendChild(el('span','ptime', esc(row.t)));
       if (row.open){
-        var b = el('button','openslot','<span class="ast">✦</span>&nbsp; Open block · submit an event here');
+        var b = el('button','openslot',
+          '<span class="ast">✦</span>' +
+          '<span class="oslot"><span class="ot">Open block · submit an event here</span>' +
+          '<span class="orooms">' + roomChip('back') + roomChip('front') + '</span></span>');
         b.type = 'button';
         b.setAttribute('aria-label','Submit an event for ' + day.d + ' September ' + day.n + ', ' + row.t);
         b.addEventListener('click', function(){ pickSlot(day, row); });
         pr.appendChild(b);
       } else {
-        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + '</span>'));
+        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + roomChip(row.room) + '</span>'));
       }
       panel.appendChild(pr);
     });
+  }
+
+  var ROOMS = {back:'Back room', front:'Front room'};
+  function roomChip(room){
+    if (!room) return '';
+    return '<span class="rmchip rm-' + room + '"><i></i>' + ROOMS[room] + '</span>';
   }
 
   function openCount(){
@@ -687,7 +739,7 @@ section{scroll-margin-top:24px}
       events.forEach(function(row){
         var pr = el('div','prow');
         pr.appendChild(el('span','ptime', esc(row.t)));
-        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + '</span>'));
+        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + roomChip(row.room) + '</span>'));
         wrap.appendChild(pr);
       });
     });
