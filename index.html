@@ -770,6 +770,7 @@ section{scroll-margin-top:24px}
       var events = day.rows.filter(function(r){ return !r.open; });
       if (!events.length) return;
       var sec = el('details','lday');
+      if (day.n === 21) sec.open = true;   /* Monday opens by default */
       var sum = document.createElement('summary');
       sum.className = 'ldate';
       sum.innerHTML = '<span>' + day.d + ' &middot; September ' + day.n + '</span>' +
