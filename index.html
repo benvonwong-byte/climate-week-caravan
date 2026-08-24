@@ -61,16 +61,16 @@ body{
 .maplink:hover{opacity:1}
 .map{width:100%;height:auto;display:block}
 .map text{font-family:var(--sans);paint-order:stroke fill;stroke:#0C1A3C;stroke-width:5px;stroke-linejoin:round}
-.m-st{font-size:15px;font-weight:600;letter-spacing:1.5px;fill:#98A2C4}
-.m-park{font-size:15px;font-weight:600;letter-spacing:1.5px;fill:#B8C4E8}
-.m-ring{font-size:15px;font-weight:600;letter-spacing:2px;fill:#98A2C4}
-.m-stn{font-size:17px;font-weight:700;letter-spacing:1.5px;fill:#E0BC64}
-.m-walk{font-size:14px;font-weight:600;letter-spacing:1px;fill:#98A2C4}
-.m-busl{font-size:13px;font-weight:600;letter-spacing:1px;fill:#98A2C4}
-.m-bullet{font-size:15px;font-weight:700;fill:#0B1733;stroke:none}
-.m-star{font-size:28px;fill:#E0BC64;stroke:none}
-.m-place{font-size:20px;font-weight:700;letter-spacing:2.5px;fill:#E0BC64}
-.m-addr{font-size:15px;font-weight:600;letter-spacing:1.5px;fill:#98A2C4}
+.m-st{font-size:13px;font-weight:600;letter-spacing:1.2px;fill:#98A2C4}
+.m-park{font-size:13px;font-weight:600;letter-spacing:1.2px;fill:#B8C4E8}
+.m-ring{font-size:13px;font-weight:600;letter-spacing:1.6px;fill:#98A2C4}
+.m-stn{font-size:15px;font-weight:700;letter-spacing:1.2px;fill:#E0BC64}
+.m-walk{font-size:13px;font-weight:600;letter-spacing:.8px;fill:#98A2C4}
+.m-busl{font-size:12.5px;font-weight:600;letter-spacing:.8px;fill:#98A2C4}
+.m-bullet{font-size:12px;font-weight:700;fill:#0B1733;stroke:none}
+.m-star{font-size:26px;fill:#E0BC64;stroke:none}
+.m-place{font-size:18px;font-weight:700;letter-spacing:2px;fill:#E0BC64}
+.m-addr{font-size:13px;font-weight:600;letter-spacing:1.2px;fill:#98A2C4}
 @media (max-width:720px){
   /* the map shrinks with the viewport, so drop secondary labels and
      scale the rest up in user units to stay legible on a phone */
@@ -82,7 +82,8 @@ body{
   .m-walk{font-size:21px}
   .m-place{font-size:29px;letter-spacing:1.5px}
   .m-addr{font-size:22px}
-  .m-bullet{font-size:22px}
+  .m-bullet{font-size:17px}
+  .sc{r:19px}
   .map text{stroke-width:7px}
   .maplink{margin-left:-24px;margin-right:-24px;width:calc(100% + 48px)}
 }
@@ -547,23 +548,23 @@ section{scroll-margin-top:24px}
             <text class="m-busl" x="486" y="257">M14A BUS</text>
           </g>
 
-          <circle cx="320" cy="50" r="14" fill="#E0BC64"/>
+          <circle class="sc" cx="320" cy="50" r="14" fill="#E0BC64"/>
           <text class="m-bullet" x="320" y="57" text-anchor="middle">L</text>
           <text class="m-stn" x="344" y="56">1 AV <tspan class="m-walk">· 8 MIN WALK</tspan></text>
 
-          <circle cx="50" cy="188" r="14" fill="#E0BC64"/>
+          <circle class="sc" cx="50" cy="188" r="14" fill="#E0BC64"/>
           <text class="m-bullet" x="50" y="195" text-anchor="middle">6</text>
           <text class="m-stn" x="74" y="194">ASTOR PL <tspan class="m-walk">· 10 MIN</tspan></text>
 
-          <circle cx="175" cy="415" r="14" fill="#E0BC64"/>
+          <circle class="sc" cx="175" cy="415" r="14" fill="#E0BC64"/>
           <text class="m-bullet" x="175" y="422" text-anchor="middle">F</text>
           <text class="m-stn" x="199" y="421">2 AV <tspan class="m-walk">· 8 MIN WALK</tspan></text>
 
           <g class="m-union">
-            <circle cx="34" cy="50" r="12" fill="#E0BC64"/>
-            <text class="m-bullet" x="34" y="56" text-anchor="middle">4</text>
-            <circle cx="61" cy="50" r="12" fill="#E0BC64"/>
-            <text class="m-bullet" x="61" y="56" text-anchor="middle">N</text>
+            <circle cx="32" cy="50" r="13" fill="#E0BC64"/>
+            <text class="m-bullet" x="32" y="55" text-anchor="middle">4</text>
+            <circle cx="63" cy="50" r="13" fill="#E0BC64"/>
+            <text class="m-bullet" x="63" y="55" text-anchor="middle">N</text>
             <text class="m-stn" x="20" y="92">UNION SQ <tspan class="m-walk">· 15 MIN</tspan></text>
           </g>
 
