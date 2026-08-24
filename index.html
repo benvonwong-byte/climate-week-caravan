@@ -181,8 +181,21 @@ section{scroll-margin-top:24px}
 .vbtn[aria-pressed="true"]{color:var(--blue);border-color:rgba(224,188,100,.5)}
 
 /* list view */
-.ldate{font-size:.86rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);padding:24px 0 4px}
-.ldate:first-child{padding-top:0}
+/* each day pins its own date; the next day pushes it up */
+.lday{position:relative}
+.ldate{
+  position:sticky;top:0;z-index:5;
+  font-size:.86rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);
+  margin:0 -26px;padding:15px 26px 11px;
+  background:rgba(11,23,51,.94);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(224,188,100,.16);
+}
+.lday + .lday{margin-top:16px}
+.lday .prow:first-of-type{border-top:none}
+@media (max-width:600px){
+  .ldate{margin:0 -16px;padding:13px 16px 10px}
+}
 .lmore{margin-top:26px;padding-top:18px;border-top:1px solid var(--hairline);font-size:.92rem;color:var(--grey)}
 .lmore button{background:none;border:none;padding:0;font:inherit;color:var(--blue);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,188,100,.5)}
 .lmore button:hover{text-decoration-color:var(--blue)}
@@ -214,7 +227,10 @@ section{scroll-margin-top:24px}
 @media (max-width:600px){.block{padding:18px 16px 22px;border-radius:12px}}
 
 /* day tabs */
-.daytabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.daytabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--hairline);-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;
+  position:sticky;top:0;z-index:5;margin:0 -26px;padding:0 26px;
+  background:rgba(11,23,51,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+@media (max-width:600px){.daytabs{margin:0 -16px;padding:0 16px}}
 .daytabs::-webkit-scrollbar{display:none;width:0;height:0}
 .dtab{flex:1 0 auto;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--grey);font-family:var(--sans);font-size:.86rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 9px 12px;cursor:pointer;white-space:nowrap;transition:color .15s ease-out,border-color .15s ease-out}
 .dtab:hover{color:var(--ink)}
@@ -750,13 +766,15 @@ section{scroll-margin-top:24px}
     WEEK.forEach(function(day){
       var events = day.rows.filter(function(r){ return !r.open; });
       if (!events.length) return;
-      wrap.appendChild(el('div','ldate', day.d + ' &middot; September ' + day.n));
+      var sec = el('section','lday');
+      sec.appendChild(el('div','ldate', day.d + ' &middot; September ' + day.n));
       events.forEach(function(row){
         var pr = el('div','prow');
         pr.appendChild(el('span','ptime', esc(row.t)));
         pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + roomChip(row.room) + '</span>'));
-        wrap.appendChild(pr);
+        sec.appendChild(pr);
       });
+      wrap.appendChild(sec);
     });
     var more = el('div','lmore','Plus ' + openCount() +
       ' open blocks across the week. <button type="button" id="tolist-day">Pick a day to claim one</button>.');
