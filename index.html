@@ -67,8 +67,10 @@ body{
 .m-stn{font-size:15px;font-weight:700;letter-spacing:1.2px;fill:#E0BC64}
 .m-walk{font-size:13px;font-weight:600;letter-spacing:.8px;fill:#98A2C4}
 .m-busl{font-size:12.5px;font-weight:600;letter-spacing:.8px;fill:#98A2C4}
-.m-bullet{font-size:12px;font-weight:700;fill:#0B1733;stroke:none}
-.m-star{font-size:26px;fill:#E0BC64;stroke:none}
+/* text.m-bullet, not .m-bullet: ".map text" carries the halo stroke and
+   outranks a bare class, which was painting a 5px outline over each letter */
+.map text.m-bullet{font-size:15px;font-weight:600;fill:#0B1733;stroke:none;paint-order:fill}
+.map text.m-star{font-size:26px;fill:#E0BC64;stroke:none;paint-order:fill}
 .m-place{font-size:18px;font-weight:700;letter-spacing:2px;fill:#E0BC64}
 .m-addr{font-size:13px;font-weight:600;letter-spacing:1.2px;fill:#98A2C4}
 @media (max-width:720px){
@@ -82,7 +84,7 @@ body{
   .m-walk{font-size:21px}
   .m-place{font-size:29px;letter-spacing:1.5px}
   .m-addr{font-size:22px}
-  .m-bullet{font-size:17px}
+  .map text.m-bullet{font-size:20px}
   .sc{r:19px}
   .map text{stroke-width:7px}
   .maplink{margin-left:-24px;margin-right:-24px;width:calc(100% + 48px)}
