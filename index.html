@@ -274,6 +274,10 @@ section{scroll-margin-top:24px}
 .lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:1px solid rgba(224,188,100,.4);background:rgba(11,23,51,.6);color:var(--blue);font-size:1.6rem;line-height:1;cursor:pointer}
 .lb-prev{left:16px}.lb-next{right:16px}
 .lb-x:hover,.lb-nav:hover{background:var(--blue);color:var(--paper)}
+#guide-overlay{z-index:90}
+.rmodal-sm{max-width:640px}
+.f-check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;color:var(--body);font-size:.95rem;line-height:1.5;cursor:pointer}
+.f-check input{margin-top:3px;accent-color:var(--olive);width:16px;height:16px;flex:none}
 .rmbtn{border:none;background:none;padding:0;font:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(224,188,100,.4);text-underline-offset:3px}
 .rmbtn:hover{text-decoration-color:var(--blue)}
 @media (max-width:820px){
@@ -479,8 +483,11 @@ section{scroll-margin-top:24px}
         </div>
       </div>
       <p class="up-intro r">All week long, this space will offer nourishing
-      bites and thoughtful events. If we can support your team with a workshop,
-      talk, or activity, please <a href="#join">let us know</a>.</p>
+      bites and thoughtfully curated events. If you&rsquo;re interested in this
+      space and would love to host an event that aligns with our
+      <button type="button" class="linkish" data-guide>guidelines</button>, we
+      can support your team with a workshop, talk, or activity. Please
+      <a href="#join">let us know</a>.</p>
       <p class="up-intro r">Our private back room holds about 40 people, with
       screens, A/V, a microphone and a speaker, and it reconfigures around
       whatever you are doing: <button type="button" class="linkish" data-rooms>see
@@ -636,42 +643,6 @@ section{scroll-margin-top:24px}
   <div class="orn r" aria-hidden="true"><span></span><b>&#10022;</b><span></span></div>
 
   <!-- ================= JOIN ================= -->
-  <section class="sec curation" id="curation">
-    <div class="wrap">
-      <span class="lbl r">The curation</span>
-      <p class="txt r">During Climate Week, we want to curate a space of
-      convergence to cross-pollinate regenerators, where both native New Yorkers
-      and outsiders can come to nourish their minds, bodies, and spirits.</p>
-      <p class="txt r" style="margin-top:14px">Together, we hope to nurture the
-      conditions for patrons to exchange ways of future-proofing our
-      neighborhoods and communities by tapping into resilience practices and
-      structures.</p>
-      <p class="txt r" style="margin-top:14px">We are partnering with Caravan of
-      Dreams to make this project happen, and will leave this place better than
-      we found it by ensuring they make at least $3,000 a day in food sales.</p>
-      <p class="txt r" style="margin-top:26px">We exclude nobody at the door. We
-      shape the week by curating its hosts, and every event clears the same
-      short list:</p>
-      <ul class="crit">
-        <li class="r"><strong>It cross-pollinates.</strong> It mixes worlds that
-        do not usually share a room: stewards and builders, capital and justice,
-        artists and organizers, locals and visitors.</li>
-        <li class="r"><strong>It builds capacity.</strong> Guests leave holding
-        one thing they can do in their own neighborhood, and three ways to take
-        a next step: support it, celebrate it, amplify it.</li>
-        <li class="r"><strong>It starts from what already exists.</strong> The
-        neighborhoods around us already practice resilience. Events amplify that
-        work rather than arriving as though nothing is here.</li>
-        <li class="r"><strong>Hosts stay in the room.</strong> Plan to spend time
-        in the space beyond your own slot, and end on something people can act
-        on locally.</li>
-        <li class="r"><strong>Nothing is for sale.</strong> No product demos, no
-        deal flow, and no case study so specific that nobody else can use
-        it.</li>
-      </ul>
-    </div>
-  </section>
-
   <section class="sec join" id="join">
     <div class="wide">
       <div class="join-grid block">
@@ -733,6 +704,11 @@ section{scroll-margin-top:24px}
                 <input class="f-input" id="h-days" type="text" placeholder="Any evening that week&hellip;">
               </div>
               <p class="ferror" id="host-error" role="alert" hidden></p>
+              <label class="f-check">
+                <input type="checkbox" id="h-guide" required>
+                <span>I have read the <button type="button" class="linkish" data-guide>curation
+                guidelines</button>.</span>
+              </label>
               <button class="btn" type="submit">Request to host</button>
             </form>
           </div>
@@ -812,6 +788,9 @@ section{scroll-margin-top:24px}
     <p class="rmodal-cta">This space can be configured in many different ways! If
     you&rsquo;d like to <a href="#join" data-rooms-close>apply for a spot</a>,
     please let us know!</p>
+    <p class="rmodal-spec" style="margin-top:10px">Every event here aligns with
+    our <button type="button" class="linkish" data-guide>curation
+    guidelines</button>.</p>
   </div>
 </div>
 
@@ -820,6 +799,25 @@ section{scroll-margin-top:24px}
   <button class="lb-nav lb-prev" id="lb-prev" type="button" aria-label="Previous photo">&#8249;</button>
   <img id="lb-img" src="" alt="">
   <button class="lb-nav lb-next" id="lb-next" type="button" aria-label="Next photo">&#8250;</button>
+</div>
+
+<div class="overlay" id="guide-overlay" hidden>
+  <div class="rmodal rmodal-sm" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+    <button class="rmodal-close" id="guide-close" aria-label="Close">&times;</button>
+    <span class="kicker">The curation</span>
+    <h2 id="guide-title">Our guidelines</h2>
+    <p class="rmodal-lede">We want to curate the best possible mixture of
+    humans. These are the broad criteria we hope your event fits:</p>
+    <ul class="crit">
+      <li><strong>It cross-pollinates.</strong> It lives on the intersection of
+      worlds that do not usually share a room.</li>
+      <li><strong>It helps build capacity.</strong> Attendees leave with actions
+      they can take.</li>
+      <li><strong>It senses into the long arc of time.</strong></li>
+      <li><strong>It doesn&rsquo;t try to pitch or sell something.</strong> This
+      isn&rsquo;t a corporate demo day.</li>
+    </ul>
+  </div>
 </div>
 
 <script>
@@ -1065,9 +1063,47 @@ section{scroll-margin-top:24px}
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape' && !ov.hidden){
         var lbEl = document.getElementById('lb');
-        if (!lbEl || lbEl.hidden) close();
+        var gEl = document.getElementById('guide-overlay');
+        if ((!lbEl || lbEl.hidden) && (!gEl || gEl.hidden)) close();
       }
       if (e.key === 'Tab' && !ov.hidden){
+        var f = ov.querySelectorAll('button, a[href]');
+        if (!f.length) return;
+        var first = f[0], last = f[f.length-1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    });
+  })();
+
+  /* curation guidelines popup */
+  (function(){
+    var ov = document.getElementById('guide-overlay');
+    if (!ov) return;
+    var closeBtn = document.getElementById('guide-close');
+    var lastFocus = null;
+    function open(trigger){
+      lastFocus = trigger || document.activeElement;
+      ov.hidden = false;
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function close(){
+      ov.hidden = true;
+      var rooms = document.getElementById('rooms-overlay');
+      if (!rooms || rooms.hidden) document.body.style.overflow = '';
+      if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+    }
+    document.addEventListener('click', function(e){
+      var t = e.target.closest ? e.target.closest('[data-guide]') : null;
+      if (t){ e.preventDefault(); open(t); }
+    });
+    closeBtn.addEventListener('click', close);
+    ov.addEventListener('mousedown', function(e){ if (e.target === ov) close(); });
+    document.addEventListener('keydown', function(e){
+      if (ov.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'Tab'){
         var f = ov.querySelectorAll('button, a[href]');
         if (!f.length) return;
         var first = f[0], last = f[f.length-1];
