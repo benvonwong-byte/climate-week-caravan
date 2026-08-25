@@ -214,6 +214,10 @@ section{scroll-margin-top:24px}
 
 
 /* the fuller invitation, opened by anyone deciding whether this is for them */
+.crit{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:14px;max-width:62ch}
+.crit li{position:relative;padding-left:30px;color:var(--body);line-height:1.7}
+.crit li::before{content:'\2733';position:absolute;left:2px;top:2px;color:var(--blue);font-size:.85rem}
+.crit strong{color:var(--ink);font-weight:600}
 .vision{margin-top:26px;border:1px dashed rgba(224,188,100,.35);border-radius:12px;background:rgba(184,196,232,.03)}
 .vision summary{
   cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px;
@@ -515,20 +519,6 @@ section{scroll-margin-top:24px}
       <p class="note r">If you want to co-host any events with us, or use this as
       your home base for Climate Week, please <a href="#join">reach out</a>.</p>
 
-      <details class="vision r">
-        <summary><span>Is this you? Read what we are reaching for</span></summary>
-        <div class="vision-body">
-          <p>We want to future-proof our neighborhoods by tapping into building
-          resiliency practices, networks, and structures. During Climate Week we
-          want to be a <em class="gl">pollinator hub</em> of regenerators, where
-          both native New Yorkers and people doing this work elsewhere can come
-          together and get inspired.</p>
-          <p class="vision-q">We are asking: what critical connections do we want
-          or need to make to deepen our capacity towards building
-          <em class="gl">Islands of Coherence</em>, or
-          <em class="gl">future-proofed</em> communities?</p>
-        </div>
-      </details>
     </div>
   </section>
 
@@ -646,6 +636,42 @@ section{scroll-margin-top:24px}
   <div class="orn r" aria-hidden="true"><span></span><b>&#10022;</b><span></span></div>
 
   <!-- ================= JOIN ================= -->
+  <section class="sec curation" id="curation">
+    <div class="wrap">
+      <span class="lbl r">The curation</span>
+      <p class="txt r">During Climate Week, we want to curate a space of
+      convergence to cross-pollinate regenerators, where both native New Yorkers
+      and outsiders can come to nourish their minds, bodies, and spirits.</p>
+      <p class="txt r" style="margin-top:14px">Together, we hope to nurture the
+      conditions for patrons to exchange ways of future-proofing our
+      neighborhoods and communities by tapping into resilience practices and
+      structures.</p>
+      <p class="txt r" style="margin-top:14px">We are partnering with Caravan of
+      Dreams to make this project happen, and will leave this place better than
+      we found it by ensuring they make at least $3,000 a day in food sales.</p>
+      <p class="txt r" style="margin-top:26px">We exclude nobody at the door. We
+      shape the week by curating its hosts, and every event clears the same
+      short list:</p>
+      <ul class="crit">
+        <li class="r"><strong>It cross-pollinates.</strong> It mixes worlds that
+        do not usually share a room: stewards and builders, capital and justice,
+        artists and organizers, locals and visitors.</li>
+        <li class="r"><strong>It builds capacity.</strong> Guests leave holding
+        one thing they can do in their own neighborhood, and three ways to take
+        a next step: support it, celebrate it, amplify it.</li>
+        <li class="r"><strong>It starts from what already exists.</strong> The
+        neighborhoods around us already practice resilience. Events amplify that
+        work rather than arriving as though nothing is here.</li>
+        <li class="r"><strong>Hosts stay in the room.</strong> Plan to spend time
+        in the space beyond your own slot, and end on something people can act
+        on locally.</li>
+        <li class="r"><strong>Nothing is for sale.</strong> No product demos, no
+        deal flow, and no case study so specific that nobody else can use
+        it.</li>
+      </ul>
+    </div>
+  </section>
+
   <section class="sec join" id="join">
     <div class="wide">
       <div class="join-grid block">
