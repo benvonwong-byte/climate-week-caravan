@@ -151,6 +151,9 @@ section{scroll-margin-top:24px}
 /* ---------- top line ---------- */
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:22px 0 0}
 .top .name{font-family:var(--serif);font-size:1rem;color:var(--ink);text-decoration:none}
+.top .name a{color:inherit;text-decoration:none;transition:color .2s ease-out}
+.top .name a:hover{color:var(--blue)}
+.top .name .with{color:var(--grey)}
 .top a.quiet{font-size:.85rem;font-weight:600;color:var(--blue);text-decoration:none;border:1px solid var(--blue);border-radius:999px;padding:7px 16px;transition:background .2s ease-out,color .2s ease-out}
 .top a.quiet:hover{background:var(--blue);color:var(--paper)}
 
@@ -443,7 +446,8 @@ section{scroll-margin-top:24px}
 
 <div class="wrap">
   <header class="top">
-    <a class="name" href="#top">Caravan of Dreams</a>
+    <span class="name"><a href="https://www.caravanofdreams.net/" target="_blank" rel="noopener noreferrer">Caravan of
+    Dreams</a> <span class="with">with</span> <a href="https://dearcrisis.com" target="_blank" rel="noopener noreferrer">Dear Crisis</a></span>
     <a class="quiet" href="#join">Get notified</a>
   </header>
 </div>
@@ -454,7 +458,6 @@ section{scroll-margin-top:24px}
   <section class="hero">
     <svg id="rose" viewBox="0 0 400 400" aria-hidden="true"></svg>
     <div class="wrap">
-      <p class="keywords r"><span class="lbl">Urban refuge <span class="ast">&#10035;</span> Point of convergence <span class="ast">&#10035;</span> Shared table <span class="ast">&#10035;</span> Co-dreaming</span></p>
       <h1 class="r">Where Climate Week <br class="bd"><span class="gl">Comes to Dream</span></h1>
       <p class="sub r">An urban refuge to cohere our dreams into a resilient,
       regenerative future.<br>
@@ -535,7 +538,7 @@ section{scroll-margin-top:24px}
   <section class="sec partners" id="partners">
     <div class="wrap">
       <span class="lbl r">Partners</span>
-      <p class="names r"><span class="nm">Psychedelics for Climate Action</span> <span class="ast">&#10035;</span> <span class="nm">Denizen</span> <span class="ast">&#10035;</span> <span class="nm">Earthkind</span> <span class="ast">&#10035;</span> <span class="nm">Buckminster Fuller Institute</span> <span class="ast">&#10035;</span> <span class="nm">Bioregional Embassy</span> <span class="ast">&#10035;</span> <span class="nm">Dear Crisis</span> <span class="ast">&#10035;</span> <span class="nm">and friends</span></p>
+      <p class="names r"><span class="nm">Psychedelics for Climate Action</span> <span class="ast">&#10035;</span> <span class="nm">Denizen</span> <span class="ast">&#10035;</span> <span class="nm">Earthkind</span> <span class="ast">&#10035;</span> <span class="nm">Buckminster Fuller Institute</span> <span class="ast">&#10035;</span> <span class="nm">Bioregional Embassy</span></p>
       <p class="note r">If you want to co-host any events with us, or use this as
       your home base for Climate Week, please <a href="#join">reach out</a>.</p>
 
