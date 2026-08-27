@@ -305,6 +305,8 @@ section{scroll-margin-top:24px}
 #guide-overlay{z-index:90}
 .rmodal-sm{max-width:640px}
 .f-check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;color:var(--body);font-size:.95rem;line-height:1.5;cursor:pointer}
+select.f-input{cursor:pointer}
+select.f-input option{background:#0E1B3D;color:#F2E7C8}
 .f-check input{margin-top:3px;accent-color:var(--olive);width:16px;height:16px;flex:none}
 .rmbtn{border:none;background:none;padding:0;font:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(224,188,100,.4);text-underline-offset:3px}
 .rmbtn:hover{text-decoration-color:var(--blue)}
@@ -704,13 +706,55 @@ section{scroll-margin-top:24px}
                   <input class="f-input" id="h-email" type="email" required autocomplete="email">
                 </div>
               </div>
-              <div class="f-field">
-                <label class="f-label" for="h-org">Organization, if any</label>
-                <input class="f-input" id="h-org" type="text">
+              <div class="f-pair">
+                <div class="f-field">
+                  <label class="f-label" for="h-phone">Phone</label>
+                  <input class="f-input" id="h-phone" type="tel" autocomplete="tel" placeholder="Helpful for coordination">
+                </div>
+                <div class="f-field">
+                  <label class="f-label" for="h-org">Organization, if any</label>
+                  <input class="f-input" id="h-org" type="text">
+                </div>
               </div>
               <div class="f-field">
-                <label class="f-label" for="h-what">What would you host?</label>
-                <textarea class="f-textarea" id="h-what" rows="2" required placeholder="The shape of it, in a sentence or two."></textarea>
+                <label class="f-label" for="h-title">Session title</label>
+                <input class="f-input" id="h-title" type="text" required placeholder="The name on the schedule">
+              </div>
+              <div class="f-field">
+                <label class="f-label" for="h-what">Session description</label>
+                <textarea class="f-textarea" id="h-what" rows="3" required placeholder="What happens in the room, in a few sentences."></textarea>
+              </div>
+              <div class="f-pair">
+                <div class="f-field">
+                  <label class="f-label" for="h-vis">Public or private?</label>
+                  <select class="f-input" id="h-vis" required>
+                    <option value="" disabled selected>Choose&hellip;</option>
+                    <option>Public</option>
+                    <option>Private</option>
+                  </select>
+                </div>
+                <div class="f-field">
+                  <label class="f-label" for="h-att">Open, closed, or mixed?</label>
+                  <select class="f-input" id="h-att" required>
+                    <option value="" disabled selected>Choose&hellip;</option>
+                    <option>Open to anyone</option>
+                    <option>Closed guest list</option>
+                    <option>Mixed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="f-field">
+                <label class="f-label" for="h-cur">Want help curating attendees?</label>
+                <input class="f-input" id="h-cur" type="text" placeholder="Who should be in the room? Leave blank if covered.">
+              </div>
+              <div class="f-field">
+                <label class="f-label" for="h-food">Pre-order food or snacks ahead of time?</label>
+                <select class="f-input" id="h-food">
+                  <option value="" disabled selected>Choose&hellip;</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                  <option>Not sure yet</option>
+                </select>
               </div>
               <div class="f-field">
                 <span class="f-label">Room</span>
@@ -914,7 +958,7 @@ section{scroll-margin-top:24px}
     ]},
     {d:'Wed', n:23, rows:[
       {t:'11 AM–12:30 PM', title:'East Village Tour: Energy and Innovation', host:'A field trip led by Wendy Brawer', room:'trip'},
-      {t:'11 AM–1 PM', open:true},
+      {t:'11 AM–1 PM', title:'Training AI for Alignment with Earth and Nature', host:'On hold, with Earth Alignment, Autodesk, and the National Academy of Sciences', room:'back'},
       {t:'1:30–3:30 PM', title:'Bioregional Fund and Biocultural Strategy', host:'Regen Network', room:'back'},
       {t:'4–6 PM', title:'Next Economy MBA Alumni + Friends Mixer', host:'LIFT Economy', room:'back'},
       {t:'6:30–8:30 PM', title:'New Narratives for Activism', host:'A cross-generational salon with Douglas Rushkoff', room:'back'},
@@ -922,7 +966,7 @@ section{scroll-margin-top:24px}
     ]},
     {d:'Thu', n:24, rows:[
       {t:'11 AM–1 PM', open:true},
-      {t:'1:30–3:30 PM', open:true},
+      {t:'1:30–3:30 PM', title:'Capital for Krill: Piloting an Activist Investment Trust', host:'On hold, with Overstories and Collective Capital Lab', room:'back'},
       {t:'4–6 PM', title:'The Rights of Nature: How Legal Strategies, Storytelling, and Artivism Protect Our Biodiversity', host:'Eva Frye, with Earthjustice, More Than Human Rights (MOTH NYU), Climate Shifted, and Grounded in Motion', room:'back'},
       {t:'6:30–9 PM', title:'Regenerati Party', host:'Regen Network', room:'back'}
     ]},
@@ -1266,8 +1310,14 @@ section{scroll-margin-top:24px}
       var data = {
         name: document.getElementById('h-name').value.trim(),
         email: document.getElementById('h-email').value.trim(),
+        phone: document.getElementById('h-phone').value.trim(),
         org: document.getElementById('h-org').value.trim(),
+        title: document.getElementById('h-title').value.trim(),
         what: document.getElementById('h-what').value.trim(),
+        visibility: document.getElementById('h-vis').value,
+        attendance: document.getElementById('h-att').value,
+        curation: document.getElementById('h-cur').value.trim(),
+        preorder: document.getElementById('h-food').value,
         days: document.getElementById('h-days').value.trim()
       };
 
