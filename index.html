@@ -336,6 +336,8 @@ select.f-input option{background:#0E1B3D;color:#F2E7C8}
 .rm-front{color:#8FD0E8}
 .rm-trip{color:#B8C4E8}
 .rm-trip i{background:#B8C4E8}
+.reg{display:inline-block;margin-left:10px;padding:3px 12px;border:1px solid var(--olive);border-radius:999px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--paper);background:var(--olive);text-decoration:none;white-space:nowrap;vertical-align:1px}
+.reg:hover{background:transparent;color:var(--blue);border-color:var(--blue)}
 .rm-front i{background:#8FD0E8}
 .oslot{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
 .orooms{display:flex;gap:2px}
@@ -679,13 +681,14 @@ select.f-input option{background:#0E1B3D;color:#F2E7C8}
           confirms.</p>
           <a class="btn r" href="https://lu.ma/dearcrisis" target="_blank" rel="noopener noreferrer">Subscribe on Luma</a>
           <div class="calrow r" style="margin-top:12px">
-            <a class="btn alt" href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fapi.lu.ma%2Fics%2Fget%3Fentity%3Dcalendar%26id%3Dcal-Cv4SfxulyNrsjTM&amp;name=Dear%20Crisis" target="_blank" rel="noopener noreferrer">Google Calendar</a>
-            <a class="btn alt" href="webcal://api.lu.ma/ics/get?entity=calendar&amp;id=cal-Cv4SfxulyNrsjTM">Apple / Outlook</a>
+            <a class="btn alt" href="https://calendar.google.com/calendar/r?cid=https%3A%2F%2Fdearcrisis.com%2Fclimateweek.ics" target="_blank" rel="noopener noreferrer">Google Calendar</a>
+            <a class="btn alt" href="webcal://dearcrisis.com/climateweek.ics">Apple / Outlook</a>
           </div>
           <p class="fine r" style="margin-top:14px">Luma followers get email
-          invites; the calendar buttons keep the live schedule in your own
-          calendar. The
-          <a href="https://api.lu.ma/ics/get?entity=calendar&amp;id=cal-Cv4SfxulyNrsjTM">raw iCal feed</a>
+          invites; the calendar buttons subscribe to Climate Week @ Caravan of
+          Dreams and stay current as the schedule fills. Private events show as
+          private. The
+          <a href="https://dearcrisis.com/climateweek.ics">raw iCal feed</a>
           is here too.</p>
         </div>
 
@@ -1051,10 +1054,15 @@ select.f-input option{background:#0E1B3D;color:#F2E7C8}
         b.addEventListener('click', function(){ pickSlot(day, row); });
         pr.appendChild(b);
       } else {
-        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + roomChip(row.room) + '</span>'));
+        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + roomChip(row.room) + regLink(row) + '</span>'));
       }
       panel.appendChild(pr);
     });
+  }
+
+  function regLink(row){
+    if (!row.reg) return '';
+    return ' <a class="reg" href="' + row.reg + '" target="_blank" rel="noopener noreferrer">Register &#8599;</a>';
   }
 
   var ROOMS = {back:'Dream Room', front:'Front room', trip:'Field Trip'};
@@ -1093,7 +1101,7 @@ select.f-input option{background:#0E1B3D;color:#F2E7C8}
       events.forEach(function(row){
         var pr = el('div','prow');
         pr.appendChild(el('span','ptime', esc(row.t)));
-        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + roomChip(row.room) + '</span>'));
+        pr.appendChild(el('div','pev','<span class="t">' + row.title + '</span><span class="h">' + esc(row.host) + roomChip(row.room) + regLink(row) + '</span>'));
         sec.appendChild(pr);
       });
       wrap.appendChild(sec);
@@ -1124,6 +1132,86 @@ select.f-input option{background:#0E1B3D;color:#F2E7C8}
   renderList();
   renderTabs();
   renderDay();
+
+  /* Luma is the source of truth: rebuild the schedule from the live calendar.
+     Known events keep their host lines and room chips; anything new on the
+     calendar appears with its Luma title, and public events grow a Register
+     button. If the feed is unreachable, the baked-in schedule stands. */
+  (function(){
+    var FEED = 'https://us-central1-dear-crisis.cloudfunctions.net/caravanSchedule';
+    var KNOWN = {"Live Podcast with Dr. Ayana Johnson": {"host": "Michael Mezzatesta","room": "back"},"Open Mingle with Michael Mezzatesta": {"host": "All welcome","room": "front"},"Opening Event": {"host": "Denizen + Dear Crisis","room": "both"},"Solstice: Urban Re-Enchantment": {"host": "On hold, with Sadie Rittman and Henry Kramer","room": "back"},"Private Dinner with Nate Hagens": {"host": "Invitation only","room": "back"},"The Great Simplification": {"host": "A talk by Nate Hagens","room": "back"},"East Village Tour: Energy and Innovation": {"host": "A field trip led by Wendy Brawer","room": "trip"},"Training AI for Alignment with Earth and Nature": {"host": "On hold, with Earth Alignment, Autodesk, and the National Academy of Sciences","room": "back"},"Bioregional Fund and Biocultural Strategy": {"host": "Regen Network","room": "back"},"Next Economy MBA Alumni + Friends Mixer": {"host": "LIFT Economy","room": "back"},"New Narratives for Activism": {"host": "A cross-generational salon with Douglas Rushkoff","room": "back"},"Capital for Krill: Piloting an Activist Investment Trust": {"host": "On hold, with Overstories and Collective Capital Lab","room": "back"},"The Rights of Nature: How Legal Strategies, Storytelling, and Artivism Protect Our Biodiversity": {"host": "Eva Frye, with Earthjustice, More Than Human Rights (MOTH NYU), Climate Shifted, and Grounded in Motion","room": "back"},"Regenerati Party": {"host": "Regen Network","room": "back"},"Procter and Gamble Descendants Group": {"host": "On hold","room": "back"}};
+    var GRID = [
+      {t:'11 AM\u20131 PM', s:660, e:780},
+      {t:'1:30\u20133:30 PM', s:810, e:930},
+      {t:'4\u20136 PM', s:960, e:1080},
+      {t:'6:30\u20138:30 PM', s:1110, e:1230},
+      {t:'9\u201311 PM', s:1260, e:1380}
+    ];
+    var DAYS = [{d:'Mon',n:21},{d:'Tue',n:22},{d:'Wed',n:23},{d:'Thu',n:24},{d:'Fri',n:25},{d:'Sat',n:26},{d:'Sun',n:27}];
+    var fmtNY = new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',day:'numeric',hour:'numeric',minute:'numeric',hour12:false});
+    function nyParts(iso){
+      var o = {};
+      fmtNY.formatToParts(new Date(iso)).forEach(function(x){ o[x.type] = x.value; });
+      return { day: +o.day, mins: ((+o.hour) % 24) * 60 + (+o.minute) };
+    }
+    function fmt(mins, withMer){
+      var hh = Math.floor(mins/60), mm = mins % 60;
+      var mer = hh >= 12 ? ' PM' : ' AM';
+      var h12 = hh % 12 === 0 ? 12 : hh % 12;
+      return h12 + (mm ? ':' + (mm < 10 ? '0' : '') + mm : '') + (withMer ? mer : '');
+    }
+    function label(s, e){
+      var same = (s >= 720) === (e >= 720);
+      return fmt(s, !same) + '\u2013' + fmt(e, true);
+    }
+    function apply(events){
+      var byDay = {};
+      DAYS.forEach(function(d){ byDay[d.n] = []; });
+      events.forEach(function(ev){
+        if (!ev || !ev.name || !ev.start_at || !ev.end_at) return;
+        var s = nyParts(ev.start_at), e = nyParts(ev.end_at);
+        if (!(s.day in byDay)) return;
+        var hold = / \(Hold\)$/.test(ev.name);
+        var title = ev.name.replace(/ \(Hold\)$/, '');
+        var k = KNOWN[title] || {};
+        byDay[s.day].push({
+          t: label(s.mins, e.day === s.day ? e.mins : 1440),
+          title: title,
+          host: k.host || (hold ? 'On hold' : ''),
+          room: k.room || 'back',
+          reg: ev.url || null,
+          _s: s.mins, _e: (e.day === s.day ? e.mins : 1440)
+        });
+      });
+      var any = false;
+      var week = DAYS.map(function(d){
+        var evs = byDay[d.n];
+        var rows = [];
+        GRID.forEach(function(g){
+          var busy = evs.some(function(ev){ return ev._s < g.e && ev._e > g.s && ev.room !== 'trip'; });
+          if (!busy) rows.push({t:g.t, open:true, _s:g.s});
+        });
+        evs.forEach(function(ev){ rows.push(ev); any = true; });
+        rows.sort(function(a,b){ return a._s - b._s; });
+        rows.forEach(function(r){ delete r._s; delete r._e; });
+        return {d:d.d, n:d.n, rows:rows};
+      });
+      if (!any) return;
+      WEEK.length = 0;
+      week.forEach(function(d){ WEEK.push(d); });
+      renderList();
+      renderTabs();
+      renderDay();
+    }
+    try {
+      var ctl = ('AbortController' in window) ? new AbortController() : null;
+      if (ctl) setTimeout(function(){ ctl.abort(); }, 4500);
+      fetch(FEED, ctl ? {signal: ctl.signal} : {})
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){ if (d && d.events && d.events.length) apply(d.events); })
+        .catch(function(){});
+    } catch (err) {}
+  })();
   setView('list');
 
   var seeOpen = document.getElementById('see-openings');
